@@ -1,0 +1,57 @@
+.payment-layout {
+  display: grid;
+  grid-template-columns: 1fr 300px;
+  gap: 32px;
+  max-width: 800px;
+}
+@media (max-width: 680px) { .payment-layout { grid-template-columns: 1fr; } }
+
+.payment-form h2 { font-size: 24px; margin-bottom: 4px; }
+.pay-subtitle { color: var(--text-muted); font-size: 14px; margin-bottom: 24px; }
+
+.card-visual {
+  background: linear-gradient(135deg, #1e3a8a, #1d4ed8, #3b82f6);
+  border-radius: 12px;
+  padding: 24px;
+  margin-bottom: 24px;
+  min-height: 120px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.cv-number {
+  font-family: 'Syne', sans-serif;
+  font-size: 20px;
+  letter-spacing: 0.1em;
+  color: #fff;
+}
+.cv-bottom { display: flex; justify-content: space-between; align-items: center; }
+.cv-bottom span { color: rgba(255,255,255,0.8); font-size: 14px; }
+.cv-brand { font-size: 24px; }
+
+.form-fields { display: flex; flex-direction: column; gap: 16px; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+
+.pay-btn { width: 100%; margin-top: 20px; justify-content: center; padding: 16px; font-size: 16px; }
+.pay-hint { font-size: 12px; color: var(--text-dim); text-align: center; margin-top: 12px; }
+
+.payment-summary h3 { font-size: 18px; margin-bottom: 16px; }
+.ps-line { display: flex; justify-content: space-between; font-size: 14px; color: var(--text-muted); margin-bottom: 10px; }
+.ps-total { display: flex; justify-content: space-between; font-family: 'Syne', sans-serif; font-weight: 700; font-size: 20px; }
+
+/* Result screens */
+.payment-result {
+  max-width: 500px;
+  margin: 0 auto;
+  text-align: center;
+  padding: 60px 40px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+.payment-result.success { border-color: var(--success); }
+.payment-result.fail { border-color: var(--danger); }
+.result-icon { font-size: 56px; margin-bottom: 24px; }
+.payment-result h2 { font-size: 26px; margin-bottom: 12px; }
+.payment-result p { color: var(--text-muted); margin-bottom: 32px; line-height: 1.6; }
+.result-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }

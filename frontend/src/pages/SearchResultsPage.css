@@ -1,0 +1,19 @@
+.sr-header {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 32px;
+}
+.sr-title h2 { font-size: 28px; }
+
+.results-section { margin-bottom: 48px; }
+.results-label {
+  font-family: 'Syne', sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 16px;
+  color: var(--text-muted);
+  letter-spacing: 0.02em;
+}
+
+.cards-grid { display: flex; flex-direction: column; gap: 16px; }

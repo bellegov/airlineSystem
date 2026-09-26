@@ -1,0 +1,58 @@
+services:
+  # 1. БАЗА ДАННЫХ POSTGRESQL
+  airline-db:
+    image: postgres:15-alpine
+    container_name: airline-postgres
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: airline_db
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U admin -d airline_db"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  # 2. ПАНЕЛЬ ADMINER (Для просмотра базы данных в браузере)
+  adminer:
+    image: adminer
+    container_name: airline-adminer
+    ports:
+      - "8888:8080" # Открываем Adminer на порту 8888 (чтобы не мешал бэкенду)
+    depends_on:
+      airline-db:
+        condition: service_healthy
+
+  # 3. БЭКЕНД (Java Spring Boot)
+  airline-backend:
+    build: ./airlinebackend
+    container_name: airline-backend
+    ports:
+      - "8080:8080"
+    depends_on:
+      airline-db:
+        condition: service_healthy
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://airline-db:5432/airline_db
+      - SPRING_DATASOURCE_USERNAME=admin
+      - SPRING_DATASOURCE_PASSWORD=root
+    restart: always
+
+  # 4. ФРОНТЕНД (Раскомментируй этот блок, когда сделаешь папку frontend)
+  # airline-frontend:
+  #   build: ./frontend
+  #   container_name: airline-frontend
+  #   ports:
+  #     - "5173:5173"
+  #   depends_on:
+  #     - airline-backend
+  #   stdin_open: true
+  #   tty: true
+
+# Описываем волюмы (постоянное хранилище)
+volumes:
+  postgres_data:
